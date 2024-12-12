@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ATM Project</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="header">Welcome to Casino Jack's ATM</h1>
+      <div class="screenAndButtons">
+        <div class="leftPanel">
+          <div id="left1" onclick="checkBalance()">Check Balance</div>
+          <div id="left2" onclick="withdraw(20)">Withdraw Quick $20.00</div>
+          <div id="left3" onclick="withdraw(40)">Withdraw Quick $40.00</div>
+          <div id="left4" onclick="withdraw(100)">Withdraw Quick $100.00</div>
+        </div>
+        <div class="screen"></div>
+        <div class="rightPanel">
+          <div id="right" onclick="withdrawOther()">Withdraw Other Amount</div>
+          <div id="right" onclick="deposit()">Deposit</div>
+          <div id="right" onclick="changePIN()">Change PIN</div>
+          <div id="right">Play BlackJack</div>
+        </div>
+      </div>
+      <div class="numberPad">
+        <table id="numOnly">
+          <tr>
+            <td onclick="getValue(event)">7</td>
+            <td onclick="getValue(event)">8</td>
+            <td onclick="getValue(event)">9</td>
+          </tr>
+          <tr>
+            <td onclick="getValue(event)">4</td>
+            <td onclick="getValue(event)">5</td>
+            <td onclick="getValue(event)">6</td>
+          </tr>
+          <tr>
+            <td onclick="getValue(event)">1</td>
+            <td onclick="getValue(event)">2</td>
+            <td onclick="getValue(event)">3</td>
+          </tr>
+          <tr>
+            <td onclick="getValue(event)">*</td>
+            <td onclick="getValue(event)">0</td>
+            <td onclick="getValue(event)">#</td>
+          </tr>
+        </table>
+        <table id="buttonOnly">
+          <tr>
+            <td onclick="verify()">START</td>
+          </tr>
+          <tr>
+            <td onclick="enter()">ENTER</td>
+          </tr>
+          <tr>
+            <td onclick="clearScreen()">CLEAR</td>
+          </tr>
+          <tr>
+            <td onclick="exit()">EXIT</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script src="app.js" async defer></script>
+  </body>
+</html>
