@@ -28,13 +28,14 @@ const getValue = (evt) => {
   if (numPadActive) {
     screen.append(evt.target.textContent);
   } else {
-    screen.textContent = "Insert Card and Click START to begin";
+    // screen.textContent = "Insert Card and Click START to begin";
   }
 };
 
 function clearScreen() {
   screen.textContent = "";
   screen.textContent = "What would you like to do next?";
+  numPadActive = false;
 }
 
 // // container.addEventListener("click", (e) => {
@@ -74,6 +75,7 @@ function enter() {
   isVerifying = false;
   pinCheck = false;
   isChangePin = false;
+  numPadActive = false;
 }
 
 function verifyPin() {
@@ -103,6 +105,7 @@ function exit() {
 }
 
 function withdrawOther() {
+  numPadActive = true;
   screen.textContent = "Enter Amount and press Enter: $";
   isWithdraw = true;
 }
@@ -117,10 +120,12 @@ function withdraw(amount) {
 }
 function deposit() {
   isDeposit = true;
+  numPadActive = true;
   screen.textContent = "Enter Deposit Amount and press Enter: $";
 }
 function changePIN() {
   isChangePin = true;
+  numPadActive = true;
   screen.textContent = "Enter New PIN: ";
 }
 
