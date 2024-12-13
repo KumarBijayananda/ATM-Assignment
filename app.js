@@ -4,6 +4,7 @@ const leftPanel = document.querySelector(".leftPanel");
 const rightPanel = document.querySelector(".rightPanel");
 
 let isVerifying,
+  isVerified,
   isWithdraw,
   pinCheck,
   numPadActive,
@@ -27,33 +28,17 @@ screen.textContent = "Insert Card and Click START to begin";
 const getValue = (evt) => {
   if (numPadActive) {
     screen.append(evt.target.textContent);
-  } else {
-    // screen.textContent = "Insert Card and Click START to begin";
   }
 };
 
-function clearScreen() {
-  screen.textContent = "";
-  screen.textContent = "What would you like to do next?";
-  numPadActive = false;
-}
-
-// // container.addEventListener("click", (e) => {
-// //   screen.textContent = "";
-// //   verify(e);
-// //   if (!isVerifying && !verifying) {
-// //     screen.textContent = "";
-// //     verifying = true;
-// //     verify(e);
-// //   } else if (!isVerifying) {
-// //     verify(e);
-// //   }
-// // });
-
+//this function should only work when not verified
 function verify(e) {
-  screen.textContent = "Enter PIN: ";
-  isVerifying = true;
-  numPadActive = true;
+  if (!isVerifying) {
+    screen.textContent = "Enter PIN: ";
+    isVerifying = true;
+    numPadActive = true;
+    clearTimeout(setTimeout);
+  }
 }
 
 function enter() {
@@ -83,8 +68,19 @@ function verifyPin() {
   let pin = screen.textContent.substring(11);
   if (pin === account.pinNumber) {
     showBalance();
+    isVerified = true;
+    isVerifying = false;
   } else {
     screen.textContent = `Invalid PIN, press START to try again or press EXIT to leave.`;
+    numPadActive = false;
+  }
+}
+
+// Functions that should only work when already signed in below
+function clearScreen() {
+  if (isVerified) {
+    screen.textContent = "";
+    screen.textContent = "What would you like to do next?";
     numPadActive = false;
   }
 }
@@ -96,12 +92,19 @@ function showBalance() {
 }
 
 function exit() {
-  screen.textContent = `Thank you for using Casino Jack's ATM.`;
-  leftPanel.style.display = "none";
-  rightPanel.style.display = "none";
-  isVerifying = false;
-  pinCheck = false;
-  numPadActive = false;
+  if (isVerified) {
+    screen.textContent = `Thank you for using Casino Jack's ATM.`;
+    leftPanel.style.display = "none";
+    rightPanel.style.display = "none";
+    isVerifying = false;
+    pinCheck = false;
+    numPadActive = false;
+    isVerified = false;
+    setTimeout(reset, 3000);
+  } else {
+    screen.textContent = `You haven't logged in yet!`;
+    setTimeout(reset, 1000);
+  }
 }
 
 function withdrawOther() {
@@ -131,4 +134,8 @@ function changePIN() {
 
 function checkBalance() {
   screen.textContent = `Your account balance is: $${account.checking}. What would you like do next?`;
+}
+
+function reset() {
+  screen.textContent = "Insert Card and Click START to begin";
 }
