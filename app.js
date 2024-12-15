@@ -139,3 +139,7 @@ function checkBalance() {
 function reset() {
   screen.textContent = "Insert Card and Click START to begin";
 }
+
+function blackJack() {
+  screen.textContent = "Blackjack coming soon...";
+}
